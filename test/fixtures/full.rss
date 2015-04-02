@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss>
+  <channel>
+    <!-- Required -->
+    <link>http://example.com/channel/link</link>
+    <title>channel_title</title>
+    <description>channel_description</description>
+
+    <!-- Optional -->
+    <language>en-us</language>
+    <copyright>Copyright © 2015 Example Co.</copyright>
+    <managingEditor>editor@example.com (Alice Doe)</managingEditor>
+    <webMaster>webMaster@example.com (Bob Doe)</webMaster>
+    <pubDate>Sat, 07 Sep 2002 00:00:01 Z</pubDate>
+  </channel>
+</rss>
