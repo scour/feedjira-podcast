@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss>
+  <channel>
+    <!-- Required -->
+    <link>not_a_url</link>
+    <title>this <i>includes</i> html content and is exceptionally long</title>
+    <description>this <i>includes</i> html content and is long Aenean lacinia bibendum nulla sed consectetur. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas sed diam eget risus varius blandit sit amet non magna.</description>
+
+    <!-- Optional -->
+    <language>not_a_language</language>
+    <copyright>does_not_include_a_date</copyright>
+    <managingEditor>not_an_email</managingEditor>
+    <webMaster>not_an_email</webMaster>
+    <pubDate>not_a_date</pubDate>
+  </channel>
+</rss>
