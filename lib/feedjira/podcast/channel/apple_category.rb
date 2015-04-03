@@ -7,7 +7,7 @@ module Feedjira
 
         attribute :text
 
-        # element :"itunes:category", as: :subcategory, class: AppleSubcategory
+        element :"itunes:category", as: :subcategory, class: AppleSubcategory
 
       end
     end
