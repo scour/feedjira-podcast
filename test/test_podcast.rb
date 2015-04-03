@@ -207,6 +207,18 @@ class TestPodcast < Minitest::Test
       #   assert_equal 'itunes_author', @feed.itunes.author
       # end
 
+      it 'finds some categories' do
+        assert_operator @feed.itunes.categories.count, :>, 1
+      end
+
+      it 'gets the top-level categories' do
+        assert_equal ['first_category', 'second_category', 'third_category'], @feed.itunes.categories.map(&:text)
+      end
+
+      it 'gets the sub category' do
+        assert_equal 'first_sub_category', @feed.itunes.categories[0].subcategory
+      end
+
       it 'finds the image' do
         uri = Addressable::URI.parse('http://example.com/channel/itunes/image/href')
         assert_equal uri, @feed.itunes.image.href

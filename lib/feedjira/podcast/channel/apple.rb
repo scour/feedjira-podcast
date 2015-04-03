@@ -10,7 +10,7 @@ module Feedjira
             block == 'yes'
           end
 
-          # base.element :"itunes:category", as: :itunes_author
+          base.elements :"itunes:category", as: :itunes_categories, class: AppleCategory
 
           base.element :"itunes:image", as: :itunes_image_href, value: :href do |href|
             Addressable::URI.parse(href)
@@ -34,7 +34,7 @@ module Feedjira
             @itunes ||= Struct.new(
               :author,
               :block?,
-              # :category,
+              :categories,
               :image,
               :explicit?,
               :clean?,
@@ -46,7 +46,7 @@ module Feedjira
             ).new(
               itunes_author,
               itunes_block,
-              # itunes_category,
+              itunes_categories,
               itunes_image,
               itunes_explicit,
               itunes_clean,

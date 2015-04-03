@@ -5,6 +5,8 @@ require 'feedjira/podcast/version'
 
 require 'feedjira/podcast/channel/image'
 require 'feedjira/podcast/channel/apple_owner'
+require 'feedjira/podcast/channel/apple_subcategory'
+require 'feedjira/podcast/channel/apple_category'
 
 require 'feedjira/podcast/channel/required'
 require 'feedjira/podcast/channel/optional'

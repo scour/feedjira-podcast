@@ -39,7 +39,13 @@
     <!-- Apple -->
     <itunes:author>itunes_author</itunes:author>
     <itunes:block>yes</itunes:block>
-    <!-- <itunes:category>itunes_author</itunes:category> -->
+    <itunes:category text="first_category">
+      <itunes:category text="first_sub_category" />
+    </itunes:category>
+    <itunes:category text="second_category">
+      <itunes:category text="second_sub_category" />
+    </itunes:category>
+    <itunes:category text="third_category" />
     <itunes:image href="http://example.com/channel/itunes/image/href" />
     <itunes:explicit>clean</itunes:explicit>
     <itunes:complete>yes</itunes:complete>
