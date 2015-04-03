@@ -11,6 +11,86 @@
     <copyright>Copyright © 2015 Example Co.</copyright>
     <managingEditor>editor@example.com (Alice Doe)</managingEditor>
     <webMaster>webMaster@example.com (Bob Doe)</webMaster>
-    <pubDate>Sat, 07 Sep 2002 00:00:01 Z</pubDate>
+    <pubDate>Thu, 01 Jan 1970 00:00:00 Z</pubDate>
+    <lastBuildDate>Thu, 01 Jan 1970 00:00:00 Z</lastBuildDate>
+    <category>first_category</category>
+    <category>second_category</category>
+    <category>first_category</category>
+    <generator>channel_generator</generator>
+    <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+    <!-- <cloud></cloud> -->
+    <ttl>42</ttl>
+    <image>
+      <url>http://example.com/channel/image/url</url>
+      <title>channel_image_title</title>
+      <link>http://example.com/channel/image/link</link>
+      <width>42</width>
+      <height>42</height>
+      <description>channel_image_description</description>
+    </image>
+
+    <!-- Atom -->
+    <atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" type="application/rss+xml" href="http://example.com/channel/atom/link/self/href" />
+    <atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="hub" href="http://example.com/channel/atom/link/hub/href" />
+
+    <!-- Feedburner -->
+    <feedburner:info xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0" uri="feedburner_info_uri" />
+
+    <!-- Apple -->
+    <itunes:author>itunes_author</itunes:author>
+    <itunes:block>yes</itunes:block>
+    <!-- <itunes:category>itunes_author</itunes:category> -->
+    <itunes:image href="http://example.com/channel/itunes/image/href" />
+    <itunes:explicit>clean</itunes:explicit>
+    <itunes:complete>yes</itunes:complete>
+    <itunes:new-feed-url>http://example.com/channel/itunes/new-feed-url</itunes:new-feed-url>
+    <itunes:owner>
+      <itunes:email>itunes_owner@example.com</itunes:email>
+      <itunes:name>itunes_owner_name</itunes:name>
+    </itunes:owner>
+    <itunes:subtitle>itunes_subtitle</itunes:subtitle>
+    <itunes:summary>itunes_summary</itunes:summary>
+
+    <!-- Items -->
+    <item>
+      <!-- Required -->
+      <title>item_title</title>
+      <description>item_description</description>
+
+      <!-- Optional -->
+      <link>http://example.com/item/link</link>
+      <author>item_author</author>
+      <category>first_category</category>
+      <category>second_category</category>
+      <category>first_category</category>
+      <comments>http://example.com/item/comments</comments>
+      <enclosure url="http://example.com/item/enclosure/url" length="42" type="audio/mpeg" />
+      <guid>http://example.com/item/guid</guid>
+      <pubDate>Thu, 01 Jan 1970 00:00:00 Z</pubDate>
+      <source>http://example.com/item/source</source>
+
+      <!-- Apple -->
+      <itunes:author>itunes_author</itunes:author>
+      <itunes:block>yes</itunes:block>
+      <itunes:image href="http://example.com/item/itunes/image/href" />
+      <itunes:duration>1:23:20</itunes:duration>
+      <itunes:explicit>clean</itunes:explicit>
+      <itunes:isClosedCaptioned>yes</itunes:isClosedCaptioned>
+      <itunes:order>42</itunes:order>
+      <itunes:subtitle>itunes_subtitle</itunes:subtitle>
+      <itunes:summary>itunes_summary</itunes:summary>
+
+      <!-- DC -->
+      <dc:creator>dc_creator</dc:creator>
+
+      <!-- Content -->
+      <content:encoded><![CDATA[<p>content <b>encoded</b></p>]]></content:encoded>
+    </item>
+    <item>
+      <itunes:duration>1:40</itunes:duration>
+    </item>
+    <item>
+      <itunes:duration>30</itunes:duration>
+    </item>
   </channel>
 </rss>

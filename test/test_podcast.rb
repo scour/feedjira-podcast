@@ -11,6 +11,10 @@ class TestPodcast < Minitest::Test
       @full_xml = @full_file.read
       @feed = Feedjira::Feed.parse_with(Feedjira::Parser::Podcast, @full_xml)
 
+      @bad_dates_file = File.open(File.expand_path('../fixtures/bad_dates.rss', __FILE__), 'r')
+      @bad_dates_xml = @bad_dates_file.read
+      @bad_dates_feed = Feedjira::Feed.parse_with(Feedjira::Parser::Podcast, @bad_dates_xml)
+
       @blog_file = File.open(File.expand_path('../fixtures/99pi.rss', __FILE__), 'r')
       @blog_xml = @blog_file.read
     end
@@ -33,14 +37,212 @@ class TestPodcast < Minitest::Test
       # assert_equal 1, feed.class
     end
 
-    describe 'parsing' do
-      it 'finds the channel link' do
-        uri = Addressable::URI.parse("http://example.com/channel/link")
+    describe 'parsing required channel elements' do
+      it 'finds the link' do
+        uri = Addressable::URI.parse('http://example.com/channel/link')
         assert_equal uri, @feed.link
       end
 
-      it 'finds the channel title' do
+      it 'finds the title' do
         assert_equal 'channel_title', @feed.title
+      end
+
+      it 'finds the description' do
+        assert_equal 'channel_description', @feed.description
+      end
+    end
+
+    describe 'parsing optional channel elements' do
+      it 'finds the language' do
+        assert_equal 'en-us', @feed.language
+      end
+
+      it 'finds the copyright' do
+        assert_equal 'Copyright © 2015 Example Co.', @feed.copyright
+      end
+
+      it 'finds the managing editor' do
+        assert_equal 'editor@example.com (Alice Doe)', @feed.managing_editor
+      end
+
+      it 'finds the web master' do
+        assert_equal 'webMaster@example.com (Bob Doe)', @feed.web_master
+      end
+
+      it 'finds the pub date' do
+        t = Time.at(0)
+        assert_equal t, @feed.pub_date
+      end
+
+      it 'does not break with bad dates' do
+        assert_equal nil, @bad_dates_feed.pub_date
+        assert_equal nil, @bad_dates_feed.last_build_date
+        assert_equal nil, @bad_dates_feed.items[0].pub_date
+      end
+
+      it 'finds the last build date' do
+        t = Time.at(0)
+        assert_equal t, @feed.last_build_date
+      end
+
+      it 'finds the categories' do
+        assert @feed.categories
+      end
+
+      it 'finds several categories' do
+        assert_operator @feed.categories.count, :>, 1
+      end
+
+      it 'ignores duplicate categories' do
+        assert_equal 2, @feed.categories.count
+      end
+
+      it 'finds the generator' do
+        assert_equal 'channel_generator', @feed.generator
+      end
+
+      # it 'finds the cloud' do
+      #   assert_equal 'channel_generator', @feed.generator
+      # end
+
+      it 'finds the ttl' do
+        assert_equal 42, @feed.ttl
+      end
+
+      it 'finds the docs' do
+        uri = Addressable::URI.parse('http://blogs.law.harvard.edu/tech/rss')
+        assert_equal uri, @feed.docs
+      end
+
+      it 'finds the image url' do
+        uri = Addressable::URI.parse('http://example.com/channel/image/url')
+        assert_equal uri, @feed.image.url
+      end
+
+      it 'finds the image title' do
+        assert_equal 'channel_image_title', @feed.image.title
+      end
+
+      it 'finds the image link' do
+        uri = Addressable::URI.parse('http://example.com/channel/image/link')
+        assert_equal uri, @feed.image.link
+      end
+
+      it 'finds the image width' do
+        assert_equal 42, @feed.image.width
+      end
+
+      it 'finds the image height' do
+        assert_equal 42, @feed.image.height
+      end
+
+      it 'finds the image description' do
+        assert_equal 'channel_image_description', @feed.image.description
+      end
+
+      # it 'finds the rating' do
+      #   assert_equal 42, @feed.image.height
+      # end
+
+      # it 'finds the text input' do
+      #   assert_equal 42, @feed.image.height
+      # end
+
+      # it 'finds the skip hours' do
+      #   assert_equal 42, @feed.image.height
+      # end
+
+      # it 'finds the skip days' do
+      #   assert_equal 42, @feed.image.height
+      # end
+
+
+    end
+
+    describe 'parsing atom channel elements' do
+      it 'finds the href for link with self rel' do
+        uri = Addressable::URI.parse('http://example.com/channel/atom/link/self/href')
+        assert_equal uri, @feed.atom.link[:self].href
+      end
+
+      it 'finds the rel for link with self rel' do
+        assert_equal 'self', @feed.atom.link[:self].rel
+      end
+
+      it 'finds the type for link with self rel' do
+        assert_equal 'application/rss+xml', @feed.atom.link[:self].type
+      end
+
+      it 'finds the href for link with hub rel' do
+        uri = Addressable::URI.parse('http://example.com/channel/atom/link/hub/href')
+        assert_equal uri, @feed.atom.link.hub.href
+      end
+
+      it 'finds the rel for link with hub rel' do
+        assert_equal 'hub', @feed.atom.link.hub.rel
+      end
+
+      it 'finds the type for link with hub rel' do
+        assert_equal nil, @feed.atom.link.hub.type
+      end
+    end
+
+    describe 'parsing feedburner channel elements' do
+      it 'finds the feedburner info uri' do
+        uri = Addressable::URI.parse('feedburner_info_uri')
+        assert_equal uri, @feed.feedburner.info.uri
+      end
+    end
+
+    describe 'parsing apple channel elements' do
+      it 'finds the author' do
+        assert_equal 'itunes_author', @feed.itunes.author
+      end
+
+      it 'finds the block' do
+        assert_equal true, @feed.itunes.block?
+      end
+
+      # it 'finds the category' do
+      #   assert_equal 'itunes_author', @feed.itunes.author
+      # end
+
+      it 'finds the image' do
+        uri = Addressable::URI.parse('http://example.com/channel/itunes/image/href')
+        assert_equal uri, @feed.itunes.image.href
+      end
+
+      it 'finds the explicit' do
+        assert_equal false, @feed.itunes.explicit?
+      end
+
+      it 'finds the clean' do
+        assert_equal true, @feed.itunes.clean?
+      end
+
+      it 'finds the complete' do
+        assert_equal true, @feed.itunes.complete?
+      end
+
+      it 'finds the new feed url' do
+        uri = Addressable::URI.parse('http://example.com/channel/itunes/new-feed-url')
+        assert_equal uri, @feed.itunes.new_feed_url
+      end
+
+      it 'finds the owner email' do
+        assert_equal 'itunes_owner@example.com', @feed.itunes.owner.email
+      end
+
+      it 'finds the owner name' do
+        assert_equal 'itunes_owner_name', @feed.itunes.owner.name
+      end
+
+      it 'finds the subtitle' do
+        assert_equal 'itunes_subtitle', @feed.itunes.subtitle
+      end
+
+      it 'finds the summary' do
+        assert_equal 'itunes_summary', @feed.itunes.summary
       end
     end
   end
