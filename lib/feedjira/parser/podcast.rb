@@ -13,7 +13,8 @@ module Feedjira
       elements :item, as: :items, class: PodcastItem
 
       def self.able_to_parse?(xml)
-        # TODO Look for something podcast-specific
+        # TODO Look several something podcast-specific matches, especially
+        # to cover feeds that may not have any items yet
         (/\<rss|\<rdf/ =~ xml) && (/enclosure/ =~ xml)
       end
     end
