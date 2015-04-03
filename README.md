@@ -59,3 +59,9 @@ Besides standard typecasting, the parser won't try to clean up any data. For exa
 ### More Information
 
 For more detailed information about specific aspects of feeds, how they are spec'd, and how they are handled by the parser, see the [wiki](https://github.com/scour/feedjira-podcast/wiki).
+
+## In Progress
+
+Coverage of RSS, iTunes, and the other common constituents of podcast feeds is very high, but there are some bits that need to be addressed. Several rarely-used RSS elements (`<cloud>`, `<rating>`, etc) are not supported. Due to how they can be nested `<itunes:category>` is also a work in progress. More esoteric elements, such a host-specific tags, or various parts of Dublin Core, are added based on their prevalence in real world feeds.
+
+Experimental feed elements may be added over time, but they should be used with caution until they reach a critical mass or become standardized.
