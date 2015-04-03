@@ -28,6 +28,23 @@
       <height>42</height>
       <description>channel_image_description</description>
     </image>
+    <!-- rating -->
+    <textInput>
+      <title>text_input_title</title>
+      <description>text_input_description</description>
+      <name>text_input_name</name>
+      <link>http://example.com/channel/text_input/link</link>
+    </textInput>
+    <skipHours>
+      <hour>0</hour>
+      <hour>1</hour>
+      <hour>22</hour>
+      <hour>23</hour>
+    </skipHours>
+    <skipDays>
+      <day>Saturday</day>
+      <day>Sunday</day>
+    </skipDays>
 
     <!-- Atom -->
     <atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" type="application/rss+xml" href="http://example.com/channel/atom/link/self/href" />

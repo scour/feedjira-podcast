@@ -144,19 +144,25 @@ class TestPodcast < Minitest::Test
       #   assert_equal 42, @feed.image.height
       # end
 
-      # it 'finds the text input' do
-      #   assert_equal 42, @feed.image.height
-      # end
+      it 'finds the text input' do
+        uri = Addressable::URI.parse('http://example.com/channel/text_input/link')
 
-      # it 'finds the skip hours' do
-      #   assert_equal 42, @feed.image.height
-      # end
+        assert_equal 'text_input_title', @feed.text_input.title
+        assert_equal 'text_input_description', @feed.text_input.description
+        assert_equal 'text_input_name', @feed.text_input.name
+        assert_equal uri, @feed.text_input.link
+      end
 
-      # it 'finds the skip days' do
-      #   assert_equal 42, @feed.image.height
-      # end
+      it 'finds the skip hours' do
+        assert_equal 4, @feed.skip.hours.count
+        assert_equal [0, 1, 22, 23], @feed.skip.hours
+      end
 
-
+      it 'finds the skip days' do
+        assert_equal 2, @feed.skip.days.count
+        assert @feed.skip.days.include?(:Saturday)
+        assert @feed.skip.days.include?(:Sunday)
+      end
     end
 
     describe 'parsing atom channel elements' do

@@ -38,6 +38,12 @@ module Feedjira
           end
 
           # base.element :cloud
+          # A has five required attributes: domain is the domain name or IP
+          # address of the cloud, port is the TCP port that the cloud is running
+          # on, path is the location of its responder, registerProcedure is the
+          # name of the procedure to call to request notification, and protocol
+          # is xml-rpc, soap or http-post (case-sensitive), indicating which
+          # protocol is to be used.
 
           base.element :ttl do |ttl|
             ttl.to_f
@@ -57,8 +63,16 @@ module Feedjira
           end
 
           # base.element :rating
-          # base.element :skipHours
-          # base.element :skipDays
+          base.element :textInput, as: :text_input, class: TextInput, default: Struct.new(:title, :description, :name, :link).new
+          base.element :skipHours, as: :skip_hours, class: SkipHours
+          base.element :skipDays, as: :skip_days, class: SkipDays
+
+          def skip
+            @skip ||= Struct.new(:hours, :days).new(
+              skip_hours.hours,
+              skip_days.days
+            )
+          end
 
         end
       end
