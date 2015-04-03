@@ -44,6 +44,10 @@ class TestPodcastItem < Minitest::Test
         assert_equal 2, @feed.items[0].categories.count
       end
 
+      it 'always gets array for categories' do
+        assert_equal Array, @feed.items[1].categories.class
+      end
+
       it 'finds the comments' do
         uri = Addressable::URI.parse('http://example.com/item/comments')
         assert_equal uri, @feed.items[0].comments

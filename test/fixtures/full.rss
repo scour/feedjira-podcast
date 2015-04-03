@@ -88,6 +88,7 @@
     </item>
     <item>
       <itunes:duration>1:40</itunes:duration>
+      <category>only_category</category>
     </item>
     <item>
       <itunes:duration>30</itunes:duration>
