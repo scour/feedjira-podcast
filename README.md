@@ -12,6 +12,8 @@ This is a highly opinionated RSS parser designed for working with podcast feeds.
 
 The Feedjira::Podcast gem tries to strike a balance between standard Ruby idioms, the RSS and podcast specs, and needing to deal with real-world feeds that may not behave as expected. For the most part, interacting with a parsed podcast feed should be straight forward.
 
+This gem registers the podcast parser class with Feedjira, so `Feedjira::Feed.parse` and the other standard fetch/parse methods are generally the easiest ways to ingest feeds. For more information, see Feedjira's documentation.
+
 ### Common Behaviors
 
 #### Grouping
@@ -35,8 +37,6 @@ Regardless of the inclusion of those specific attributes, or even their parent e
 Most names either match their counterpart in the feed exactly (e.g. `description`, `author`), convert camel case to snake case (e.g. `pubDate` becomes `pub_date`), or transpose boolean attributes to question-mark-notation (e.g. `isPermaLink` becomes `perma_link?`, and `itunes:block` becomes `itunes.block?`).
 
 In cases where an element can repeat in a given context, the accessor will be pluralized (e.g. `<category>` becomes `categories`) and the value is an array, even if only a single element exists in a given feed.
-
-A few
 
 #### Typecasting
 
