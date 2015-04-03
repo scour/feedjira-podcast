@@ -53,3 +53,7 @@ The spec for the item `<guid>` indicates that the default value if no value is g
 The parser will try its best to parse whatever data it has available, with a strong preference for data that meets the specs commonly used for podcast feeds. The library will provide additional information that you can use to decide how to handle the data produced by the parser, but the parser itself will never refuse a document based on deficiencies or invalid data.
 
 Besides standard typecasting, the parser won't try to clean up any data. For example, many elements (such as `<description>`) explicitly allow only plaintext, but it is common for them to include markup in the wild. The parser will assume that markup to be plaintext, according to the spec. If you want to sanitize those parts of feeds, you should handle that on your end.
+
+### More Information
+
+For more detailed information about specific aspects of feeds, how they are spec'd, and how they are handled by the parser, see the [wiki](https://github.com/scour/feedjira-podcast/wiki).
