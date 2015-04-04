@@ -16,6 +16,7 @@ require 'feedjira/podcast/channel/optional'
 require 'feedjira/podcast/channel/atom'
 require 'feedjira/podcast/channel/feedburner'
 require 'feedjira/podcast/channel/apple'
+require 'feedjira/podcast/channel/syndication'
 
 require 'feedjira/podcast/item/guid'
 
