@@ -24,13 +24,16 @@ module Feedjira
             Addressable::URI.parse(url)
           end
 
-          base.element :enclosure, as: :enclosure_length, value: :length
+          base.element :enclosure, as: :enclosure_length, value: :length do |length|
+            length.to_f
+          end
+
           base.element :enclosure, as: :enclosure_type, value: :type
 
           def enclosure
             @enclosure ||= Struct.new(:url, :length, :type).new(
               enclosure_url,
-              (enclosure_length && enclosure_length.to_f),
+              enclosure_length,
               enclosure_type,
             )
           end
