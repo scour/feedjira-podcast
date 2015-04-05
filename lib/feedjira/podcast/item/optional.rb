@@ -48,7 +48,7 @@ module Feedjira
             end
           end
 
-          base.element :source, class: Source, default: Struct.new(:name, :url?).new
+          base.element :source, class: Source, default: Struct.new(:name, :url).new
 
         end
       end
