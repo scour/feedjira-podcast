@@ -133,6 +133,14 @@ class TestPodcastItem < Minitest::Test
       it 'finds the summary' do
         assert_equal 'itunes_summary', @feed.items[0].itunes.summary
       end
+
+      it 'finds some keywords' do
+        assert_equal 3, @feed.items[0].itunes.keywords.count
+      end
+
+      it 'finds the first keywords' do
+        assert_equal 'keyword1', @feed.items[0].itunes.keywords[0]
+      end
     end
 
     describe 'parsing dublin core ns item elements' do

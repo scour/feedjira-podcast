@@ -34,6 +34,12 @@ module Feedjira
           base.element :"itunes:subtitle", as: :itunes_subtitle
           base.element :"itunes:summary", as: :itunes_summary
 
+          # Legacy support
+
+          base.element :"itunes:keywords", as: :itunes_keywords do |keywords|
+            keywords.split(',').map(&:strip).select { |k| !k.empty? }
+          end
+
           def itunes
             @itunes ||= Struct.new(
               :author,
@@ -46,6 +52,7 @@ module Feedjira
               :order,
               :subtitle,
               :summary,
+              :keywords,
             ).new(
               itunes_author,
               itunes_block,
@@ -57,6 +64,7 @@ module Feedjira
               itunes_order,
               itunes_subtitle,
               itunes_summary,
+              itunes_keywords,
             )
           end
 

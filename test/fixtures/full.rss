@@ -73,6 +73,7 @@
     </itunes:owner>
     <itunes:subtitle>itunes_subtitle</itunes:subtitle>
     <itunes:summary>itunes_summary</itunes:summary>
+    <itunes:keywords>keyword1, keyword2, keyword3, </itunes:keywords>
 
     <!-- Items -->
     <item>
@@ -102,6 +103,7 @@
       <itunes:order>42</itunes:order>
       <itunes:subtitle>itunes_subtitle</itunes:subtitle>
       <itunes:summary>itunes_summary</itunes:summary>
+      <itunes:keywords>keyword1, keyword2, keyword3, </itunes:keywords>
 
       <!-- DC -->
       <dc:creator>dc_creator</dc:creator>

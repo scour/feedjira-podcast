@@ -263,6 +263,14 @@ class TestPodcast < Minitest::Test
       it 'finds the summary' do
         assert_equal 'itunes_summary', @feed.itunes.summary
       end
+
+      it 'finds some keywords' do
+        assert_equal 3, @feed.itunes.keywords.count
+      end
+
+      it 'finds the first keywords' do
+        assert_equal 'keyword1', @feed.itunes.keywords[0]
+      end
     end
   end
 end
