@@ -80,9 +80,13 @@ class TestPodcastItem < Minitest::Test
         assert_equal t, @feed.items[0].pub_date
       end
 
-      it 'finds the source' do
+      it 'finds the source url' do
         uri = Addressable::URI.parse('http://example.com/item/source')
-        assert_equal uri, @feed.items[0].source
+        assert_equal uri, @feed.items[0].source.url
+      end
+
+      it 'finds the source name' do
+        assert_equal 'source_name', @feed.items[0].source.name
       end
     end
 

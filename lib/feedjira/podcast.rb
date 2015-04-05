@@ -19,6 +19,7 @@ require 'feedjira/podcast/channel/apple'
 require 'feedjira/podcast/channel/syndication'
 
 require 'feedjira/podcast/item/guid'
+require 'feedjira/podcast/item/source'
 
 require 'feedjira/podcast/item/required'
 require 'feedjira/podcast/item/optional'

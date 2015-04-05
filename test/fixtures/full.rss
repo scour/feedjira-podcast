@@ -90,7 +90,7 @@
       <enclosure url="http://example.com/item/enclosure/url" length="42" type="audio/mpeg" />
       <guid>http://example.com/item/guid</guid>
       <pubDate>Thu, 01 Jan 1970 00:00:00 Z</pubDate>
-      <source>http://example.com/item/source</source>
+      <source url="http://example.com/item/source">source_name</source>
 
       <!-- Apple -->
       <itunes:author>itunes_author</itunes:author>

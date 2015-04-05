@@ -48,9 +48,7 @@ module Feedjira
             end
           end
 
-          base.element :source do |source|
-            Addressable::URI.parse(source)
-          end
+          base.element :source, class: Source, default: Struct.new(:name, :url?).new
 
         end
       end
