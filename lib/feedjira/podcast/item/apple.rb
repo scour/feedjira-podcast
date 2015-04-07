@@ -30,7 +30,6 @@ module Feedjira
             order.to_f
           end
 
-
           base.element :"itunes:subtitle", as: :itunes_subtitle
           base.element :"itunes:summary", as: :itunes_summary
 
@@ -72,10 +71,6 @@ module Feedjira
 
           def itunes_image
             @itunes_image ||= Struct.new(:href).new(itunes_image_href)
-          end
-
-          def itunes_duration
-
           end
 
           def itunes_explicit
