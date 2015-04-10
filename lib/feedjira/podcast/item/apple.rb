@@ -5,10 +5,7 @@ module Feedjira
         def self.included(base)
 
           base.element :"itunes:author", as: :itunes_author
-
-          base.element :"itunes:block", as: :itunes_block do |block|
-            block == 'yes'
-          end
+          base.element :"itunes:block", as: :_itunes_block
 
           base.element :"itunes:image", as: :itunes_image_href, value: :href do |href|
             Addressable::URI.parse(href)
@@ -22,10 +19,8 @@ module Feedjira
 
           base.element :"itunes:explicit", as: :_itunes_explicit
 
-          base.element :"itunes:isClosedCaptioned", as: :itunes_is_closed_captioned do |is_closed_captioned|
-            is_closed_captioned == 'yes'
-          end
-
+          base.element :"itunes:isClosedCaptioned", as: :_itunes_is_closed_captioned
+          
           base.element :"itunes:order", as: :itunes_order do |order|
             order.to_f
           end
@@ -71,6 +66,14 @@ module Feedjira
 
           def itunes_image
             @itunes_image ||= Struct.new(:href).new(itunes_image_href)
+          end
+
+          def itunes_block
+            @itunes_block ||= (_itunes_block == 'yes')
+          end
+
+          def itunes_is_closed_captioned
+            @itunes_is_closed_captioned ||= (_itunes_is_closed_captioned == 'yes')
           end
 
           def itunes_explicit

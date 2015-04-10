@@ -6,9 +6,7 @@ module Feedjira
 
           base.element :"itunes:author", as: :itunes_author
 
-          base.element :"itunes:block", as: :itunes_block do |block|
-            block == 'yes'
-          end
+          base.element :"itunes:block", as: :_itunes_block
 
           base.elements :"itunes:category", as: :itunes_categories, class: AppleCategory
 
@@ -17,10 +15,7 @@ module Feedjira
           end
 
           base.element :"itunes:explicit", as: :_itunes_explicit
-
-          base.element :"itunes:complete", as: :itunes_complete do |complete|
-            complete == 'yes'
-          end
+          base.element :"itunes:complete", as: :_itunes_complete
 
           base.element :"itunes:new_feed_url", as: :itunes_new_feed_url do |url|
             Addressable::URI.parse(url)
@@ -70,6 +65,14 @@ module Feedjira
 
           def itunes_image
             @itunes_image ||= Struct.new(:href).new(itunes_image_href)
+          end
+
+          def itunes_block
+            @itunes_block ||= (_itunes_block == 'yes')
+          end
+
+          def itunes_complete
+            @itunes_complete ||= (_itunes_complete == 'yes')
           end
 
           def itunes_explicit
