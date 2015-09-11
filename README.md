@@ -42,7 +42,7 @@ In cases where an element can repeat in a given context, the accessor will be pl
 
 #### Typecasting
 
-In nearly all cases the value types of podcast feed data is predictable. As such, the parser will cast values appropriately. In cases where a feed is malformed, the result of the type cast may be somewhat unpredictable, but no more so than the original data was. A bad value should never prevent parsing of the rest of the document, but it bust a specific value (e.g. a date that is human-readable but not parseable will end up as `nil` rather than fallback to an ambiguous `String` value).
+In nearly all cases the value types of podcast feed data is predictable. As such, the parser will cast values appropriately. In cases where a feed is malformed, the result of the type cast may be somewhat unpredictable, but no more so than the original data was. A bad value should never prevent parsing of the rest of the document, but it could bust a specific value (e.g. a date that is human-readable but not parseable will end up as `nil` rather than fallback to an ambiguous `String` value).
 
 Date values are parsed as `Time` objects, number values become `Float` objects, hrefs, URIs and URLs are parsed using [Addressable](https://github.com/sporkmonger/addressable), and boolean values will return `true` or `false.`
 
