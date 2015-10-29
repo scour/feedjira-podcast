@@ -9,7 +9,6 @@ module Feedjira
       include ::Feedjira::Podcast::Item::Apple
       include ::Feedjira::Podcast::Item::Dublin
       include ::Feedjira::Podcast::Item::Content
-
     end
   end
 end

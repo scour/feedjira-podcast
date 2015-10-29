@@ -5,9 +5,7 @@ module Feedjira
         include SAXMachine
         include FeedUtilities
 
-        elements :hour, as: :hour do |hour|
-          hour.to_f
-        end
+        elements :hour, as: :hour, &:to_f
 
         def hours
           @hours ||= hour ? hour : []

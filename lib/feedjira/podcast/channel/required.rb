@@ -3,14 +3,12 @@ module Feedjira
     module Channel
       module Required
         def self.included(base)
-
           base.element :link do |link|
             Addressable::URI.parse(link)
           end
 
           base.element :title
           base.element :description
-
         end
       end
     end

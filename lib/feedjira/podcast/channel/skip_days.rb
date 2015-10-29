@@ -5,9 +5,7 @@ module Feedjira
         include SAXMachine
         include FeedUtilities
 
-        elements :day, as: :day do |day|
-          day.to_sym
-        end
+        elements :day, as: :day, &:to_sym
 
         def days
           @days ||= day ? day : []

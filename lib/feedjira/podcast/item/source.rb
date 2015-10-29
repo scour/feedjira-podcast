@@ -10,7 +10,6 @@ module Feedjira
         attribute :url do |url|
           Addressable::URI.parse(url)
         end
-
       end
     end
   end

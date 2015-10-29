@@ -2,35 +2,7 @@ module Feedjira
   module Podcast
     module Channel
       module Apple
-        def self.included(base)
-
-          base.element :"itunes:author", as: :itunes_author
-
-          base.element :"itunes:block", as: :_itunes_block
-
-          base.elements :"itunes:category", as: :itunes_categories, class: AppleCategory
-
-          base.element :"itunes:image", as: :itunes_image_href, value: :href do |href|
-            Addressable::URI.parse(href)
-          end
-
-          base.element :"itunes:explicit", as: :_itunes_explicit
-          base.element :"itunes:complete", as: :_itunes_complete
-
-          base.element :"itunes:new_feed_url", as: :itunes_new_feed_url do |url|
-            Addressable::URI.parse(url)
-          end
-
-          base.element :"itunes:owner", as: :_itunes_owner, class: AppleOwner
-          base.element :"itunes:subtitle", as: :itunes_subtitle
-          base.element :"itunes:summary", as: :itunes_summary
-
-          # Legacy support
-
-          base.element :"itunes:keywords", as: :itunes_keywords do |keywords|
-            keywords.split(',').map(&:strip).select { |k| !k.empty? }
-          end
-
+        module InstanceMethods
           def itunes
             @itunes ||= Struct.new(
               :author,
@@ -68,19 +40,19 @@ module Feedjira
           end
 
           def itunes_block
-            @itunes_block ||= (_itunes_block == 'yes')
+            @itunes_block ||= (_itunes_block == "yes")
           end
 
           def itunes_complete
-            @itunes_complete ||= (_itunes_complete == 'yes')
+            @itunes_complete ||= (_itunes_complete == "yes")
           end
 
           def itunes_explicit
-            @itunes_explicit ||= (_itunes_explicit == 'yes')
+            @itunes_explicit ||= (_itunes_explicit == "yes")
           end
 
           def itunes_clean
-            @itunes_clean ||=  (_itunes_explicit == 'clean')
+            @itunes_clean ||= (_itunes_explicit == "clean")
           end
 
           def itunes_owner
@@ -89,7 +61,37 @@ module Feedjira
               _itunes_owner && _itunes_owner.name,
             )
           end
+        end
 
+        def self.included(base)
+          base.include(InstanceMethods)
+
+          base.element :"itunes:author", as: :itunes_author
+
+          base.element :"itunes:block", as: :_itunes_block
+
+          base.elements :"itunes:category", as: :itunes_categories, class: AppleCategory
+
+          base.element :"itunes:image", as: :itunes_image_href, value: :href do |href|
+            Addressable::URI.parse(href)
+          end
+
+          base.element :"itunes:explicit", as: :_itunes_explicit
+          base.element :"itunes:complete", as: :_itunes_complete
+
+          base.element :"itunes:new_feed_url", as: :itunes_new_feed_url do |url|
+            Addressable::URI.parse(url)
+          end
+
+          base.element :"itunes:owner", as: :_itunes_owner, class: AppleOwner
+          base.element :"itunes:subtitle", as: :itunes_subtitle
+          base.element :"itunes:summary", as: :itunes_summary
+
+          # Legacy support
+
+          base.element :"itunes:keywords", as: :itunes_keywords do |keywords|
+            keywords.split(",").map(&:strip).select { |k| !k.empty? }
+          end
         end
       end
     end

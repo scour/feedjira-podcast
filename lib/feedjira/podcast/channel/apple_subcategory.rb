@@ -6,7 +6,6 @@ module Feedjira
         include FeedUtilities
 
         attribute :text
-
       end
     end
   end

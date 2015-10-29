@@ -3,10 +3,8 @@ module Feedjira
     module Item
       module Required
         def self.included(base)
-
           base.element :title
           base.element :description
-
         end
       end
     end

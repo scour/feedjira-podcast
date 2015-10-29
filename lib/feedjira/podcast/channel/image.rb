@@ -15,14 +15,8 @@ module Feedjira
           Addressable::URI.parse(link)
         end
 
-        element :width do |width|
-          width.to_f
-        end
-
-        element :height do |height|
-          height.to_f
-        end
-
+        element :width, &:to_f
+        element :height, &:to_f
         element :description
       end
     end

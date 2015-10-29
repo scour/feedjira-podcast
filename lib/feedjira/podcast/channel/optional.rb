@@ -2,7 +2,44 @@ module Feedjira
   module Podcast
     module Channel
       module Optional
+        module InstanceMethods
+          def categories
+            category.map(&:strip).uniq
+          end
+
+          def image
+            @image ||= image_struct.new(*image_params)
+          end
+
+          def skip
+            @skip ||= Struct.new(:hours, :days).new(
+              skip_hours.hours,
+              skip_days.days
+            )
+          end
+
+          private
+
+          def image_struct
+            Struct.new(:url, :title, :link, :width, :height, :description)
+          end
+
+          def image_params
+            return [] unless _image
+
+            [
+              _image.url,
+              _image.title,
+              _image.link,
+              _image.width,
+              _image.height,
+              _image.description
+            ]
+          end
+        end
+
         def self.included(base)
+          base.include(InstanceMethods)
 
           base.element :language
           base.element :copyright
@@ -27,10 +64,6 @@ module Feedjira
 
           base.elements :category
 
-          def categories
-            category.map{|c|c.strip}.uniq
-          end
-
           base.element :generator
 
           base.element :docs do |docs|
@@ -45,35 +78,14 @@ module Feedjira
           # is xml-rpc, soap or http-post (case-sensitive), indicating which
           # protocol is to be used.
 
-          base.element :ttl do |ttl|
-            ttl.to_f
-          end
+          base.element :ttl, &:to_f
 
           base.element :image, as: :_image, class: Image
-
-          def image
-            @image ||= Struct.new(:url, :title, :link, :width, :height, :description).new(
-              _image && _image.url,
-              _image && _image.title,
-              _image && _image.link,
-              _image && _image.width,
-              _image && _image.height,
-              _image && _image.description,
-            )
-          end
 
           # base.element :rating
           base.element :textInput, as: :text_input, class: TextInput, default: Struct.new(:title, :description, :name, :link).new
           base.element :skipHours, as: :skip_hours, class: SkipHours
           base.element :skipDays, as: :skip_days, class: SkipDays
-
-          def skip
-            @skip ||= Struct.new(:hours, :days).new(
-              skip_hours.hours,
-              skip_days.days
-            )
-          end
-
         end
       end
     end

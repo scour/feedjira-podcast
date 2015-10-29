@@ -8,7 +8,6 @@ module Feedjira
         attribute :text
 
         element :"itunes:category", as: :subcategory, class: AppleSubcategory
-
       end
     end
   end

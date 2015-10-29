@@ -2,8 +2,11 @@ module Feedjira
   module Podcast
     module Channel
       module Syndication
-        def self.included(base)
+        module InstanceMethods
+        end
 
+        def self.included(_base)
+          base.include(InstanceMethods)
         end
       end
     end
