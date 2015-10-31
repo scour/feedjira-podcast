@@ -9,4 +9,4 @@ require "rubocop/rake_task"
 RuboCop::RakeTask.new(:analyze)
 
 task checks: [:test, :analyze]
-task default: :checks
+task default: :test
