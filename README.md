@@ -56,6 +56,10 @@ The parser will try its best to parse whatever data it has available, with a str
 
 Besides standard typecasting, the parser won't try to clean up any data. For example, many elements (such as `<description>`) explicitly allow only plaintext, but it is common for them to include markup in the wild. The parser will assume that markup to be plaintext, according to the spec. If you want to sanitize those parts of feeds, you should handle that on your end.
 
+#### Parsing
+
+During parsing, some aspects of the original feed will not be maintained in such a way that a functionally identical feed could be generated from the result. For example. `CDATA` declarations in XML elements are lost, as the parser converts them (correctly) to strings. If the resulting data is being used to generate feeds, wrapping values in CDATA would be the responsibility of the whatever is constructing the feed, based on the values of the strings.
+
 ### More Information
 
 For more detailed information about specific aspects of feeds, how they are spec'd, and how they are handled by the parser, see the [wiki](https://github.com/scour/feedjira-podcast/wiki).
