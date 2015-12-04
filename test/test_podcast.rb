@@ -168,15 +168,15 @@ class TestPodcast < Minitest::Test
     describe "parsing atom channel elements" do
       it "finds the href for link with self rel" do
         uri = Addressable::URI.parse("http://example.com/channel/atom/link/self/href")
-        assert_equal uri, @feed.atom.link[:self].href
+        assert_equal uri, @feed.atom.link.self.href
       end
 
       it "finds the rel for link with self rel" do
-        assert_equal "self", @feed.atom.link[:self].rel
+        assert_equal "self", @feed.atom.link.self.rel
       end
 
       it "finds the type for link with self rel" do
-        assert_equal "application/rss+xml", @feed.atom.link[:self].type
+        assert_equal "application/rss+xml", @feed.atom.link.self.type
       end
 
       it "finds the href for link with hub rel" do
