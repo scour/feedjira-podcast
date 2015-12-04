@@ -44,7 +44,7 @@ In cases where an element can repeat in a given context, the accessor will be pl
 
 In nearly all cases the value types of podcast feed data is predictable. As such, the parser will cast values appropriately. In cases where a feed is malformed, the result of the type cast may be somewhat unpredictable, but no more so than the original data was. A bad value should never prevent parsing of the rest of the document, but it could bust a specific value (e.g. a date that is human-readable but not parseable will end up as `nil` rather than fallback to an ambiguous `String` value).
 
-Date values are parsed as `Time` objects, number values become `Float` objects, hrefs, URIs and URLs are parsed using [Addressable](https://github.com/sporkmonger/addressable), and boolean values will return `true` or `false.`
+Date values are parsed as `Time` objects, number values become `Float` objects, hrefs, URIs and URLs are parsed using [Addressable](https://github.com/sporkmonger/addressable), and boolean values will return `true` or `false`.
 
 In the case of the `<itunes:explicit>` tag, there are three mutually exclusive options, `"yes"`, `"clean"`, and any other value (representing `"no"`). This element gets expanded to two properties through parsing, `explicit?` and `clean?`, allowing both to be simple boolean values.
 
@@ -58,7 +58,7 @@ Besides standard typecasting, the parser won't try to clean up any data. For exa
 
 #### Parsing
 
-During parsing, some aspects of the original feed will not be maintained in such a way that a functionally identical feed could be generated from the result. For example. `CDATA` declarations in XML elements are lost, as the parser converts them (correctly) to strings. If the resulting data is being used to generate feeds, wrapping values in CDATA would be the responsibility of the whatever is constructing the feed, based on the values of the strings.
+During parsing, some aspects of the original feed will not be maintained in such a way that a functionally identical feed could be generated from the result. For example. `CDATA` declarations in XML elements are lost, as the parser converts them (correctly) to strings. If the resulting data is being used to generate feeds, wrapping values in CDATA would be the responsibility of the whatever is constructing the feed, based on the values of the strings. Similarly, Apple expects iTunes category tag values to include encoded ampersands, eg `TV &amp; Film`. Parsing the feed will decode those values (to `TV & Film`), so they would have to be re-encoded before being used somewhere that iTunes would be reading from.
 
 ### More Information
 
@@ -66,6 +66,6 @@ For more detailed information about specific aspects of feeds, how they are spec
 
 ## In Progress
 
-Coverage of RSS, iTunes, and the other common constituents of podcast feeds is very high, but there are some bits that need to be addressed. Several rarely-used RSS elements (`<cloud>`, `<rating>`, etc) are not supported. Due to how they can be nested `<itunes:category>` is also a work in progress. Currently only top-level categories are available. More esoteric elements, such a host-specific tags, or various parts of Dublin Core, are added based on their prevalence in real world feeds.
+Coverage of RSS, iTunes, and the other common constituents of podcast feeds is very high, but there are some bits that need to be addressed. Several rarely-used RSS elements (`<rating>`, etc) are not supported. More esoteric elements, such a host-specific tags, or various parts of Dublin Core, are added based on their prevalence in real world feeds.
 
 Experimental feed elements may be added over time, but they should be used with caution until they reach a critical mass or become standardized.
