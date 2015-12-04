@@ -6,6 +6,10 @@ class TestPodcastItem < Minitest::Test
       @full_file = File.open(File.expand_path("../fixtures/full.rss", __FILE__), "r")
       @full_xml = @full_file.read
       @feed = Feedjira::Feed.parse_with(Feedjira::Parser::Podcast, @full_xml)
+
+      @bad_dates_file = File.open(File.expand_path("../fixtures/bad_dates.rss", __FILE__), "r")
+      @bad_dates_xml = @bad_dates_file.read
+      @bad_dates_feed = Feedjira::Feed.parse_with(Feedjira::Parser::Podcast, @bad_dates_xml)
     end
 
     it "finds some items" do
@@ -108,6 +112,7 @@ class TestPodcastItem < Minitest::Test
         assert_equal 5000, @feed.items[0].itunes.duration
         assert_equal 100, @feed.items[1].itunes.duration
         assert_equal 30, @feed.items[2].itunes.duration
+        assert_equal nil, @bad_dates_feed.items[0].itunes.duration
       end
 
       it "finds the explicit" do
