@@ -6,6 +6,10 @@ module Feedjira
         include FeedUtilities
 
         attribute :text
+
+        def valid?(category)
+          AppleCategory::CATEGORIES[category.text].include?(text)
+        end
       end
     end
   end

@@ -43,6 +43,10 @@ module Feedjira
             @itunes_block ||= (_itunes_block == "yes")
           end
 
+          def itunes_categories
+            @itunes_categories ||= _itunes_categories.select(&:valid?)
+          end
+
           def itunes_complete
             @itunes_complete ||= (_itunes_complete == "yes")
           end
@@ -70,7 +74,7 @@ module Feedjira
 
           base.element :"itunes:block", as: :_itunes_block
 
-          base.elements :"itunes:category", as: :itunes_categories, class: AppleCategory
+          base.elements :"itunes:category", as: :_itunes_categories, class: AppleCategory
 
           base.element :"itunes:image", as: :itunes_image_href, value: :href do |href|
             Addressable::URI.parse(href)

@@ -15,6 +15,10 @@ class TestPodcast < Minitest::Test
       @bad_dates_xml = @bad_dates_file.read
       @bad_dates_feed = Feedjira::Feed.parse_with(Feedjira::Parser::Podcast, @bad_dates_xml)
 
+      @broken_file = File.open(File.expand_path("../fixtures/broken.rss", __FILE__), "r")
+      @broken_xml = @broken_file.read
+      @broken_feed = Feedjira::Feed.parse_with(Feedjira::Parser::Podcast, @broken_xml)
+
       @blog_file = File.open(File.expand_path("../fixtures/99pi.rss", __FILE__), "r")
       @blog_xml = @blog_file.read
     end
@@ -229,21 +233,40 @@ class TestPodcast < Minitest::Test
         assert_equal true, @feed.itunes.block?
       end
 
-      # it "finds the category" do
-      #   assert_equal "itunes_author", @feed.itunes.author
-      # end
-
       it "finds some categories" do
         assert_operator @feed.itunes.categories.count, :>, 1
       end
 
       it "gets the top-level categories" do
-        assert_equal ["first_category", "second_category", "third_category"], @feed.itunes.categories.map(&:text)
+        assert_equal ["Arts", "Business", "Comedy", "Government & Organizations"], @feed.itunes.categories.map(&:text)
+      end
+
+      it "finds some subcategories" do
+        assert @feed.itunes.categories.first.subcategory
+      end
+
+      it "finds no subcategories" do
+        assert_nil @feed.itunes.categories[2].subcategory
       end
 
       it "gets the sub category" do
-        # TODO
-        # assert_equal "first_sub_category", @feed.itunes.categories[0].subcategory
+        assert_equal "Design", @feed.itunes.categories.first.subcategory.text
+      end
+
+      it "rejects bogus iTunes top-level categories" do
+        assert_equal 3, @broken_feed.itunes.categories.count
+      end
+
+      it "finds valid iTunes top-level categories" do
+        assert_equal ["Arts", "Comedy", "Business"], @broken_feed.itunes.categories.map(&:text)
+      end
+
+      it "rejects bogus iTunes subcategories" do
+        assert_nil @broken_feed.itunes.categories[1].subcategory
+      end
+
+      it "finds a valid iTunes subcategory" do
+        assert_equal "Management & Marketing", @broken_feed.itunes.categories[2].subcategory.text
       end
 
       it "finds the image" do

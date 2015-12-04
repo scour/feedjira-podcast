@@ -18,7 +18,7 @@
     <category>first_category</category>
     <generator>channel_generator</generator>
     <docs>http://blogs.law.harvard.edu/tech/rss</docs>
-    <!-- <cloud></cloud> -->
+    <cloud domain="rpc.example.com" port="80" path="/RPC2" registerProcedure="myCloud.rssPleaseNotify" protocol="xml-rpc" />
     <ttl>42</ttl>
     <image>
       <url>http://example.com/channel/image/url</url>
@@ -56,13 +56,14 @@
     <!-- Apple -->
     <itunes:author>itunes_author</itunes:author>
     <itunes:block>yes</itunes:block>
-    <itunes:category text="first_category">
-      <itunes:category text="first_sub_category" />
+    <itunes:category text="Arts">
+      <itunes:category text="Design" />
     </itunes:category>
-    <itunes:category text="second_category">
-      <itunes:category text="second_sub_category" />
+    <itunes:category text="Business">
+      <itunes:category text="Management &amp; Marketing" />
     </itunes:category>
-    <itunes:category text="third_category" />
+    <itunes:category text="Comedy" />
+    <itunes:category text="Government &amp; Organizations" />
     <itunes:image href="http://example.com/channel/itunes/image/href" />
     <itunes:explicit>clean</itunes:explicit>
     <itunes:complete>yes</itunes:complete>

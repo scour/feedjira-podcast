@@ -12,5 +12,18 @@
     <managingEditor>not_an_email</managingEditor>
     <webMaster>not_an_email</webMaster>
     <pubDate>not_a_date</pubDate>
+
+    <!-- Apple -->
+    <itunes:category text="not_a_category" />
+    <itunes:category text="not_another_category">
+      <itunes:category text="not_a_subcategory" />
+    </itunes:category>
+    <itunes:category text="Arts" />
+    <itunes:category text="Comedy">
+      <itunes:category text="not_another_subcategory" />
+    </itunes:category>
+    <itunes:category text="Business">
+      <itunes:category text="Management &amp; Marketing" />
+    </itunes:category>
   </channel>
 </rss>
