@@ -7,6 +7,10 @@ module Feedjira
             category.map(&:strip).uniq
           end
 
+          def cloud
+            @cloud ||= cloud_struct.new(*cloud_params)
+          end
+
           def image
             @image ||= image_struct.new(*image_params)
           end
@@ -19,6 +23,22 @@ module Feedjira
           end
 
           private
+
+          def cloud_struct
+            Struct.new(:domain, :port, :path, :registerProcedure, :protocol)
+          end
+
+          def cloud_params
+            return [] unless _cloud
+
+            [
+              _cloud.domain,
+              _cloud.port,
+              _cloud.path,
+              _cloud.registerProcedure,
+              _cloud.protocol
+            ]
+          end
 
           def image_struct
             Struct.new(:url, :title, :link, :width, :height, :description)
@@ -70,13 +90,7 @@ module Feedjira
             Addressable::URI.parse(docs)
           end
 
-          # base.element :cloud
-          # A has five required attributes: domain is the domain name or IP
-          # address of the cloud, port is the TCP port that the cloud is running
-          # on, path is the location of its responder, registerProcedure is the
-          # name of the procedure to call to request notification, and protocol
-          # is xml-rpc, soap or http-post (case-sensitive), indicating which
-          # protocol is to be used.
+          base.element :cloud, as: :_cloud, class: Cloud
 
           base.element :ttl, &:to_f
 

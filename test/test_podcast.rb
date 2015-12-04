@@ -101,9 +101,29 @@ class TestPodcast < Minitest::Test
         assert_equal "channel_generator", @feed.generator
       end
 
-      # it "finds the cloud" do
-      #   assert_equal "channel_generator", @feed.generator
-      # end
+      it "finds the cloud" do
+        assert @feed.cloud
+      end
+
+      it "finds the cloud domain" do
+        assert_equal "rpc.example.com", @feed.cloud.domain
+      end
+
+      it "finds the cloud port" do
+        assert_equal "80", @feed.cloud.port
+      end
+
+      it "finds the cloud path" do
+        assert_equal "/RPC2", @feed.cloud.path
+      end
+
+      it "finds the cloud registerProcedure" do
+        assert_equal "myCloud.rssPleaseNotify", @feed.cloud.registerProcedure
+      end
+
+      it "finds the cloud protocol" do
+        assert_equal "xml-rpc", @feed.cloud.protocol
+      end
 
       it "finds the ttl" do
         assert_equal 42, @feed.ttl

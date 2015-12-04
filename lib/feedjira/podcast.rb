@@ -3,6 +3,7 @@ require "addressable/uri"
 
 require "feedjira/podcast/version"
 
+require "feedjira/podcast/channel/cloud"
 require "feedjira/podcast/channel/image"
 require "feedjira/podcast/channel/skip_hours"
 require "feedjira/podcast/channel/skip_days"
