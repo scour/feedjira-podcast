@@ -164,9 +164,9 @@ class TestPodcast < Minitest::Test
         assert_equal "channel_image_description", @feed.image.description
       end
 
-      # it "finds the rating" do
-      #   assert_equal 42, @feed.image.height
-      # end
+      it "finds the rating" do
+        assert_equal %Q[(PICS-1.1 "http://www.classify.org/safesurf/" 1 r (SS~~000 1))], @feed.rating
+      end
 
       it "finds the text input" do
         uri = Addressable::URI.parse("http://example.com/channel/text_input/link")

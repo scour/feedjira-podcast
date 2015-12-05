@@ -96,7 +96,7 @@ module Feedjira
 
           base.element :image, as: :_image, class: Image
 
-          # base.element :rating
+          base.element :rating
           base.element :textInput, as: :text_input, class: TextInput, default: Struct.new(:title, :description, :name, :link).new
           base.element :skipHours, as: :skip_hours, class: SkipHours
           base.element :skipDays, as: :skip_days, class: SkipDays

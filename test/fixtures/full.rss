@@ -28,7 +28,7 @@
       <height>42</height>
       <description>channel_image_description</description>
     </image>
-    <!-- rating -->
+    <rating>(PICS-1.1 "http://www.classify.org/safesurf/" 1 r (SS~~000 1))</rating>
     <textInput>
       <title>text_input_title</title>
       <description>text_input_description</description>
