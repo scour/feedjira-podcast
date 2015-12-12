@@ -165,7 +165,7 @@ class TestPodcast < Minitest::Test
       end
 
       it "finds the rating" do
-        assert_equal %Q[(PICS-1.1 "http://www.classify.org/safesurf/" 1 r (SS~~000 1))], @feed.rating
+        assert_equal %[(PICS-1.1 "http://www.classify.org/safesurf/" 1 r (SS~~000 1))], @feed.rating
       end
 
       it "finds the text input" do
