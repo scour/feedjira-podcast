@@ -8,7 +8,7 @@ module Feedjira
         value :source, as: :name
 
         attribute :url do |url|
-          Addressable::URI.parse(url)
+          Addressable::URI.parse(url.strip)
         end
       end
     end

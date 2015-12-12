@@ -77,14 +77,14 @@ module Feedjira
           base.elements :"itunes:category", as: :_itunes_categories, class: AppleCategory
 
           base.element :"itunes:image", as: :itunes_image_href, value: :href do |href|
-            Addressable::URI.parse(href)
+            Addressable::URI.parse(href.strip)
           end
 
           base.element :"itunes:explicit", as: :_itunes_explicit
           base.element :"itunes:complete", as: :_itunes_complete
 
           base.element :"itunes:new_feed_url", as: :itunes_new_feed_url do |url|
-            Addressable::URI.parse(url)
+            Addressable::URI.parse(url.strip)
           end
 
           base.element :"itunes:owner", as: :_itunes_owner, class: AppleOwner

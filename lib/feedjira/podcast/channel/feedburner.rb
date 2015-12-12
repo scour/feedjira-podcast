@@ -13,7 +13,7 @@ module Feedjira
           base.include(InstanceMethods)
 
           base.element :"feedburner:info", as: :feedburner_info_uri, value: :uri do |uri|
-            Addressable::URI.parse(uri)
+            Addressable::URI.parse(uri.strip)
           end
         end
       end

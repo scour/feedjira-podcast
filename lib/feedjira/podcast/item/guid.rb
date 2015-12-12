@@ -6,7 +6,7 @@ module Feedjira
         include FeedUtilities
 
         value :guid do |guid|
-          perma_link? ? Addressable::URI.parse(guid) : guid
+          perma_link? ? Addressable::URI.parse(guid.strip) : guid
         end
 
         attribute :isPermaLink, as: :is_perma_link

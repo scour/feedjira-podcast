@@ -39,7 +39,7 @@ module Feedjira
           ["self", "hub"].each do |rel|
             [:"atom:link", :"atom10:link"].each do |ns|
               base.element ns, with: { rel: rel }, as: "atom_#{rel}_link_href".to_sym, value: :href do |href|
-                Addressable::URI.parse(href)
+                Addressable::URI.parse(href.strip)
               end
               base.element ns, with: { rel: rel }, as: "atom_#{rel}_link_rel".to_sym, value: :rel
               base.element ns, with: { rel: rel }, as: "atom_#{rel}_link_type".to_sym, value: :type

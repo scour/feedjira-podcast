@@ -10,7 +10,7 @@ module Feedjira
         element :name
 
         element :link do |link|
-          Addressable::URI.parse(link)
+          Addressable::URI.parse(link.strip)
         end
       end
     end
