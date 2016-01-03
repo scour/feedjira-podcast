@@ -8,7 +8,7 @@ module Feedjira
         attribute :domain
         attribute :port
         attribute :path
-        attribute :registerProcedure
+        attribute :registerProcedure, as: :register_procedure
         attribute :protocol
       end
     end

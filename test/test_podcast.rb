@@ -122,7 +122,7 @@ class TestPodcast < Minitest::Test
       end
 
       it "finds the cloud registerProcedure" do
-        assert_equal "myCloud.rssPleaseNotify", @feed.cloud.registerProcedure
+        assert_equal "myCloud.rssPleaseNotify", @feed.cloud.register_procedure
       end
 
       it "finds the cloud protocol" do

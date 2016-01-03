@@ -25,7 +25,7 @@ module Feedjira
           private
 
           def cloud_struct
-            Struct.new(:domain, :port, :path, :registerProcedure, :protocol)
+            Struct.new(:domain, :port, :path, :register_procedure, :protocol)
           end
 
           def cloud_params
@@ -35,7 +35,7 @@ module Feedjira
               _cloud.domain,
               _cloud.port,
               _cloud.path,
-              _cloud.registerProcedure,
+              _cloud.register_procedure,
               _cloud.protocol
             ]
           end
