@@ -93,7 +93,7 @@ module Feedjira
 
           # Legacy support
 
-          base.element :"itunes:keywords", as: :itunes_keywords do |keywords|
+          base.element :"itunes:keywords", as: :itunes_keywords, default: "" do |keywords|
             keywords.split(",").map(&:strip).select { |k| !k.empty? }
           end
         end

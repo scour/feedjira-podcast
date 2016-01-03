@@ -16,10 +16,7 @@ module Feedjira
           end
 
           def skip
-            @skip ||= Struct.new(:hours, :days).new(
-              skip_hours.hours,
-              skip_days.days
-            )
+            @skip ||= skip_struct.new(*skip_params)
           end
 
           private
@@ -54,6 +51,17 @@ module Feedjira
               _image.width,
               _image.height,
               _image.description
+            ]
+          end
+
+          def skip_struct
+            Struct.new(:hours, :days)
+          end
+
+          def skip_params
+            [
+              skip_hours.hours,
+              skip_days.days
             ]
           end
         end
@@ -98,8 +106,8 @@ module Feedjira
 
           base.element :rating
           base.element :textInput, as: :text_input, class: TextInput, default: Struct.new(:title, :description, :name, :link).new
-          base.element :skipHours, as: :skip_hours, class: SkipHours
-          base.element :skipDays, as: :skip_days, class: SkipDays
+          base.element :skipHours, as: :skip_hours, class: SkipHours, default: Struct.new(:hours).new([])
+          base.element :skipDays, as: :skip_days, class: SkipDays, default: Struct.new(:days).new([])
         end
       end
     end

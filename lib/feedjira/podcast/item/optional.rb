@@ -39,7 +39,7 @@ module Feedjira
 
           base.element :enclosure, as: :enclosure_type, value: :type
 
-          base.element :guid, as: :guid, class: GUID, default: Struct.new(:guid, :perma_link?).new
+          base.element :guid, as: :guid, class: GUID, default: Struct.new(:guid, :perma_link?).new(nil, false)
 
           base.element :pubDate, as: :pub_date do |date|
             begin
