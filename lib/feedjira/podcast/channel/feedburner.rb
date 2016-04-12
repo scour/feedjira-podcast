@@ -12,7 +12,9 @@ module Feedjira
         def self.included(base)
           base.include(InstanceMethods)
 
-          base.element :"feedburner:info", as: :feedburner_info_uri, value: :uri do |uri|
+          feedburner_xml_ns = "feedburner"
+
+          base.element :"#{feedburner_xml_ns}:info", as: :feedburner_info_uri, value: :uri do |uri|
             Addressable::URI.parse(uri.strip)
           end
         end

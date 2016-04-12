@@ -11,7 +11,9 @@ module Feedjira
         def self.included(base)
           base.include(InstanceMethods)
 
-          base.element :"content:encoded", as: :content_encoded
+          content_xml_ns = "content"
+
+          base.element :"#{content_xml_ns}:encoded", as: :content_encoded
         end
       end
     end

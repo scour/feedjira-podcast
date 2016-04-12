@@ -57,31 +57,33 @@ module Feedjira
         def self.included(base)
           base.include(InstanceMethods)
 
-          base.element :"itunes:author", as: :itunes_author
-          base.element :"itunes:block", as: :_itunes_block
+          itunes_xml_ns = "itunes"
 
-          base.element :"itunes:image", as: :itunes_image_href, value: :href do |href|
+          base.element :"#{itunes_xml_ns}:author", as: :itunes_author
+          base.element :"#{itunes_xml_ns}:block", as: :_itunes_block
+
+          base.element :"#{itunes_xml_ns}:image", as: :itunes_image_href, value: :href do |href|
             Addressable::URI.parse(href.strip)
           end
 
-          base.element :"itunes:duration", as: :itunes_duration do |d|
+          base.element :"#{itunes_xml_ns}:duration", as: :itunes_duration do |d|
             ["0:0:0:#{d}".split(":")[-3, 3].map(&:to_i)].inject(0) do |_m, i|
               (i[0] * 3600) + (i[1] * 60) + i[2]
             end
           end
 
-          base.element :"itunes:explicit", as: :_itunes_explicit
+          base.element :"#{itunes_xml_ns}:explicit", as: :_itunes_explicit
 
-          base.element :"itunes:isClosedCaptioned", as: :_itunes_is_closed_captioned
+          base.element :"#{itunes_xml_ns}:isClosedCaptioned", as: :_itunes_is_closed_captioned
 
-          base.element :"itunes:order", as: :itunes_order, &:to_f
+          base.element :"#{itunes_xml_ns}:order", as: :itunes_order, &:to_f
 
-          base.element :"itunes:subtitle", as: :itunes_subtitle
-          base.element :"itunes:summary", as: :itunes_summary
+          base.element :"#{itunes_xml_ns}:subtitle", as: :itunes_subtitle
+          base.element :"#{itunes_xml_ns}:summary", as: :itunes_summary
 
           # Legacy support
 
-          base.element :"itunes:keywords", as: :itunes_keywords do |keywords|
+          base.element :"#{itunes_xml_ns}:keywords", as: :itunes_keywords do |keywords|
             keywords.split(",").map(&:strip).select { |k| !k.empty? }
           end
         end

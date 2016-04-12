@@ -13,7 +13,9 @@ module Feedjira
         def self.included(base)
           base.include(InstanceMethods)
 
-          base.element :"dc:creator", as: :dc_creator
+          dc_xml_ns = "dc"
+
+          base.element :"#{dc_xml_ns}:creator", as: :dc_creator
         end
       end
     end

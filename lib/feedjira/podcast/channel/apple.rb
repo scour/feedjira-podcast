@@ -70,30 +70,32 @@ module Feedjira
         def self.included(base)
           base.include(InstanceMethods)
 
-          base.element :"itunes:author", as: :itunes_author
+          itunes_xml_ns = "itunes"
 
-          base.element :"itunes:block", as: :_itunes_block
+          base.element :"#{itunes_xml_ns}:author", as: :itunes_author
 
-          base.elements :"itunes:category", as: :_itunes_categories, class: AppleCategory
+          base.element :"#{itunes_xml_ns}:block", as: :_itunes_block
 
-          base.element :"itunes:image", as: :itunes_image_href, value: :href do |href|
+          base.elements :"#{itunes_xml_ns}:category", as: :_itunes_categories, class: AppleCategory
+
+          base.element :"#{itunes_xml_ns}:image", as: :itunes_image_href, value: :href do |href|
             Addressable::URI.parse(href.strip)
           end
 
-          base.element :"itunes:explicit", as: :_itunes_explicit
-          base.element :"itunes:complete", as: :_itunes_complete
+          base.element :"#{itunes_xml_ns}:explicit", as: :_itunes_explicit
+          base.element :"#{itunes_xml_ns}:complete", as: :_itunes_complete
 
-          base.element :"itunes:new_feed_url", as: :itunes_new_feed_url do |url|
+          base.element :"#{itunes_xml_ns}:new_feed_url", as: :itunes_new_feed_url do |url|
             Addressable::URI.parse(url.strip)
           end
 
-          base.element :"itunes:owner", as: :_itunes_owner, class: AppleOwner
-          base.element :"itunes:subtitle", as: :itunes_subtitle
-          base.element :"itunes:summary", as: :itunes_summary
+          base.element :"#{itunes_xml_ns}:owner", as: :_itunes_owner, class: AppleOwner
+          base.element :"#{itunes_xml_ns}:subtitle", as: :itunes_subtitle
+          base.element :"#{itunes_xml_ns}:summary", as: :itunes_summary
 
           # Legacy support
 
-          base.element :"itunes:keywords", as: :itunes_keywords, default: "" do |keywords|
+          base.element :"#{itunes_xml_ns}:keywords", as: :itunes_keywords, default: "" do |keywords|
             keywords.split(",").map(&:strip).select { |k| !k.empty? }
           end
         end
