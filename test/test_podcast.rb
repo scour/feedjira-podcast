@@ -41,6 +41,38 @@ class TestPodcast < Minitest::Test
       # assert_equal 1, feed.class
     end
 
+    describe "parsing root elements" do
+      it "finds the rss node" do
+        assert @feed.rss
+      end
+
+      it "gets the RSS version" do
+        assert_equal "2.0", @feed.rss.version
+      end
+
+      it "finds the channel node" do
+        assert @feed.rss.channel
+      end
+
+      it "finds the channel's child nodes" do
+        assert @feed.rss.channel.link
+      end
+
+      it "proxies channel's elements to the root" do
+        assert_equal @feed.rss.channel.link, @feed.link
+      end
+    end
+
+    describe "walking up the tree" do
+      it "gets to XML from RSS" do
+        assert @feed.rss.xml
+      end
+
+      it "gets to RSS from channel" do
+        assert @feed.rss.channel.rss
+      end
+    end
+
     describe "parsing required channel elements" do
       it "finds the link" do
         uri = Addressable::URI.parse("http://example.com/channel/link")
