@@ -46,11 +46,11 @@ module Feedjira
           end
 
           def itunes_explicit
-            @itunes_explicit ||= (_itunes_explicit == "yes")
+            @itunes_explicit ||= ["yes", "explicit", "true"].include?(_itunes_explicit)
           end
 
           def itunes_clean
-            @itunes_clean ||= (_itunes_explicit == "clean")
+            @itunes_clean ||= ["no", "clean", "false"].include?(_itunes_explicit)
           end
         end
 
